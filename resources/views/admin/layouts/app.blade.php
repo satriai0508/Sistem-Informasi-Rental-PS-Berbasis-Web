@@ -140,13 +140,13 @@
       <div class="page-breadcrumb">
         <div class="row align-items-center">
           <div class="col-md-6 col-8 align-self-center">
-            <h3 class="page-title mb-0 p-0">Blank Page</h3>
+            <h3 class="page-title mb-0 p-0">Dashboard</h3>
             <div class="d-flex align-items-center">
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
                   <li class="breadcrumb-item active" aria-current="page">
-                    Blank Page
+                    Dashboard
                   </li>
                 </ol>
               </nav>
@@ -166,7 +166,11 @@
         <!-- ============================================================== -->
         <div class="row">
           <div class="col-12">
-            @yield('content')
+            <div class="card">
+              <div class="card-body">
+                This is some text within a card block.
+              </div>
+            </div>
           </div>
         </div>
         <!-- ============================================================== -->
