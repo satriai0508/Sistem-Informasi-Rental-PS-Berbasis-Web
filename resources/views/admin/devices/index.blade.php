@@ -46,7 +46,7 @@
         <tr>
           <th scope="row">{{ $loop->iteration }}</th>
           <td>{{ $device->serie }}</td>
-          <td>{{ $device->joystick }}</td>
+          <td>{{ $device->joystick }} Joystick</td>
           <td>
             <a href="{{ route('devices.edit', $device->id) }}" class="btn btn-sm btn-warning">Edit</a>
             <form action="{{ route('devices.destroy', $device->id) }}" method="post">

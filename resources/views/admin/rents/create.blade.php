@@ -26,17 +26,18 @@
     <form action="/rents" method="post">
       @csrf
       @method('post')
+      <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
       <div class="form-group mb-3">
         <label for="price" class="form-label">Price</label>
         <input type="text" placeholder="Enter Price" name="price" class="form-control form-control-lg @error('price')
                     is-invalid
-                @enderror" id="price" aria-describedby="price">
+                @enderror" id="price" aria-describedby="price" value="{{ old('price') }}">
       </div>
       <div class="form-group mb-3">
         <label for="waktu_sewa" class="form-label">Waktu Sewa</label>
         <input type="text" placeholder="Enter Waktu Sewa" name="waktu_sewa" class="form-control form-control-lg @error('waktu_sewa')
                     is-invalid
-                @enderror" id="waktu_sewa" aria-describedby="waktu_sewa">
+                @enderror" id="waktu_sewa" aria-describedby="waktu_sewa" value="{{ old('waktu_sewa') }}">
       </div>
       <div class="form-group mb-3">
         <label for="device_id" class="form-label">Device</label>
@@ -46,18 +47,6 @@
           <option selected value="{{ $device->id }}">{{ $device->serie }}</option>
           @else
           <option value="{{ $device->id }}">{{ $device->serie }}</option>
-          @endif
-          @endforeach
-        </select>
-      </div>
-      <div class="form-group mb-3">
-        <label for="user_id" class="form-label">User</label>
-        <select name="user_id" class="form-select form-control form-control-lg" aria-label="user_id">
-          @foreach ($users as $user)
-          @if (old('user_id') == $user->id)
-          <option selected value="{{ $user->id }}">{{ $user->name }}</option>
-          @else
-          <option value="{{ $user->id }}">{{ $user->name }}</option>
           @endif
           @endforeach
         </select>
