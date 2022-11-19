@@ -16,8 +16,8 @@ class RentController extends Controller
      */
     public function index()
     {
-        return view('admin.rents.index',[
-            'rents'=> Rent::latest()->paginate(10)
+        return view('admin.rents.index', [
+            'rents' => Rent::latest()->paginate(10)
         ]);
     }
 
@@ -28,8 +28,8 @@ class RentController extends Controller
      */
     public function create()
     {
-        return view('admin.rents.create',[
-            'devices' => Device::latest()->get(),
+        return view('admin.rents.create', [
+            'devices' => Device::get(),
             'users' => User::get(),
         ]);
     }
@@ -42,7 +42,17 @@ class RentController extends Controller
      */
     public function store(Request $request)
     {
-        ddd($request->all());
+        $validate = $request->validate([
+            'price' => 'required|max:255',
+            'waktu_sewa' => 'required',
+        ]);
+
+        $validate['device_id'] = 'required';
+        $validate['user_id'] = auth()->user()->id;
+
+        Rent::create($validate);
+
+        return redirect('/rents')->with('success', 'Added Successfully!');
     }
 
     /**
@@ -64,7 +74,11 @@ class RentController extends Controller
      */
     public function edit(Rent $rent)
     {
-        //
+        return view('admin.rents.edit', [
+            'rent' => $rent,
+            'devices' => Device::latest()->get(),
+            'users' => User::get(),
+        ]);
     }
 
     /**
