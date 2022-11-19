@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rent;
+use App\Models\User;
+use App\Models\Device;
 use Illuminate\Http\Request;
 
 class RentController extends Controller
@@ -14,7 +16,9 @@ class RentController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.rents.index',[
+            'rents'=> Rent::latest()->paginate(10)
+        ]);
     }
 
     /**
@@ -24,7 +28,10 @@ class RentController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.rents.create',[
+            'devices' => Device::latest()->get(),
+            'users' => User::get(),
+        ]);
     }
 
     /**
@@ -35,7 +42,7 @@ class RentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        ddd($request->all());
     }
 
     /**

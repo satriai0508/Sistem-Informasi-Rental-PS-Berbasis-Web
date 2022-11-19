@@ -15,6 +15,10 @@ class CreateRentsTable extends Migration
     {
         Schema::create('rents', function (Blueprint $table) {
             $table->id();
+            $table->string('price')->nullable();
+            $table->string('waktu_sewa')->nullable();
+            $table->foreignId('user_id')->nullable();
+            $table->foreignId('device_id')->nullable();
             $table->timestamps();
         });
     }

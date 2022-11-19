@@ -14,7 +14,8 @@ class DeviceFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'serie' => $this->faker->randomElement(['PS3','PS4']),
+            'joystick' => $this->faker->randomElement(['1','2','3','4'])
         ];
     }
 }
