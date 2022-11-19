@@ -26,7 +26,7 @@
     <form action="/rents" method="post">
       @csrf
       @method('post')
-      <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+      <input type="hidden" name="user_id" value="{{ auth()->user()->id }}" id="user_id">
       <div class="form-group mb-3">
         <label for="price" class="form-label">Price</label>
         <input type="text" placeholder="Enter Price" name="price" class="form-control form-control-lg @error('price')
