@@ -2,9 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\RentController;
-use App\Models\Device;
+use App\Http\Controllers\{HomeController, DeviceController, RentController};
 
 /*
 |--------------------------------------------------------------------------
@@ -17,17 +15,16 @@ use App\Models\Device;
 |
 */
 
-Route::get('/', fn() => view('welcome'));
+Route::get('/', fn () => view('welcome'));
 
-Route::middleware(['web'])->group(function(){
-
+Route::middleware(['web'])->group(function () {
 });
 
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::middleware(['auth'])->group(function(){
-    Route::resource('device', DeviceController::class)->except(['show']);
-    Route::resource('rent',RentController::class)->except(['show']);
+Route::middleware(['auth'])->group(function () {
+    Route::resource('devices', DeviceController::class)->except(['show']);
+    Route::resource('rents', RentController::class)->except(['show']);
 });
