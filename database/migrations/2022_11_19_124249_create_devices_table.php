@@ -15,6 +15,8 @@ class CreateDevicesTable extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
+            $table->string('serie')->nullable();
+            $table->string('joystick')->default('1')->nullable();
             $table->timestamps();
         });
     }

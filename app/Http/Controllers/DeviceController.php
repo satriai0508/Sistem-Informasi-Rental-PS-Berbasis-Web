@@ -14,7 +14,9 @@ class DeviceController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.devices.index',[
+            'devices' => Device::latest()->paginate(10)
+        ]);
     }
 
     /**
@@ -24,7 +26,7 @@ class DeviceController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.devices.create');
     }
 
     /**
@@ -35,7 +37,16 @@ class DeviceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // ddd($request->all());
+
+        $validate = $request->validate([
+            'serie' => 'required|max:255',
+            'joystick' => 'required'
+        ]);
+
+        Device::create($validate);
+
+        return redirect('/devices')->with('success','Added Successfully!');
     }
 
     /**
