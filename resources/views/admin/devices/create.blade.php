@@ -23,7 +23,7 @@
 @section('content')
 <div class="card">
   <div class="card-body">
-    <form action="/devices" method="post">
+    <form action="/devices" method="post" enctype="multipart/form-data">
       @csrf
       @method('post')
       <div class="form-group mb-3">
