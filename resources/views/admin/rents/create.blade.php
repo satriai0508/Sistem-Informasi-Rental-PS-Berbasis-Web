@@ -32,12 +32,22 @@
         <input type="text" placeholder="Enter Price" name="price" class="form-control form-control-lg @error('price')
                     is-invalid
                 @enderror" id="price" aria-describedby="price" value="{{ old('price') }}">
+        @error('price')
+        <div class="invalid-feedback">
+          {{ $message }}
+        </div>
+        @enderror
       </div>
       <div class="form-group mb-3">
         <label for="waktu_sewa" class="form-label">Waktu Sewa</label>
         <input type="text" placeholder="Enter Waktu Sewa" name="waktu_sewa" class="form-control form-control-lg @error('waktu_sewa')
                     is-invalid
                 @enderror" id="waktu_sewa" aria-describedby="waktu_sewa" value="{{ old('waktu_sewa') }}">
+        @error('waktu_sewa')
+        <div class="invalid-feedback">
+          {{ $message }}
+        </div>
+        @enderror
       </div>
       <div class="form-group mb-3">
         <label for="device_id" class="form-label">Device</label>
@@ -50,6 +60,11 @@
           @endif
           @endforeach
         </select>
+        @error('device_id')
+        <div class="invalid-feedback">
+          {{ $message }}
+        </div>
+        @enderror
       </div>
       <button class="btn btn-sm btn-success">Submit</button>
     </form>

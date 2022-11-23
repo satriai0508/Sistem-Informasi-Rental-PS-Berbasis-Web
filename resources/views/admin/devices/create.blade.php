@@ -31,12 +31,22 @@
         <input type="text" placeholder="Enter Serie" name="serie" class="form-control form-control-lg @error('serie')
                     is-invalid
                 @enderror" id="serie" aria-describedby="serie" value="{{ old('serie') }}">
+          @error('serie')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+          @enderror
       </div>
       <div class="form-group mb-3">
         <label for="joystick" class="form-label">Joystick</label>
         <input type="text" placeholder="Enter Joystick" name="joystick" class="form-control form-control-lg @error('joystick')
                     is-invalid
                 @enderror" id="joystick" aria-describedby="joystick" value="{{ old('joystick') }}">
+          @error('joystick')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+          @enderror
       </div>
       <div class="form-group row mb-3">
         <label for="image" class="col-sm-3 text-end control-label col-form-label">Image</label>
@@ -55,20 +65,4 @@
     </form>
   </div>
 </div>
-
-<script>
-  function showPreview(objFileInput) {
-    if (objFileInput.files[0]) {
-      var fileReader = new FileReader();
-      fileReader.onload = function(e) {
-        $('#blah').attr('src', e.target.result);
-        $("#targetLayer").html('<img src="' + e.target.result + '" class="img-fluid w-50 h-50 m-md-2" />');
-        $("#targetLayer").css('opacity', '0.7');
-        $(".icon-choose-image").css('opacity', '0.5');
-      }
-      fileReader.readAsDataURL(objFileInput.files[0]);
-    }
-  }
-
-</script>
 @endsection
