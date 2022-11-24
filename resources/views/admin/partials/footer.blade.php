@@ -9,5 +9,19 @@
     <script src="/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="/js/sidebarmenu.js"></script>
+    <script>
+    function showPreview(objFileInput) {
+        if (objFileInput.files[0]) {
+        var fileReader = new FileReader();
+        fileReader.onload = function(e) {
+            $('#blah').attr('src', e.target.result);
+            $("#targetLayer").html('<img src="' + e.target.result + '" class="img-fluid w-50 h-50 m-md-2" />');
+            $("#targetLayer").css('opacity', '0.7');
+            $(".icon-choose-image").css('opacity', '0.5');
+        }
+        fileReader.readAsDataURL(objFileInput.files[0]);
+        }
+    }
+    </script>
     </body>
     </html>

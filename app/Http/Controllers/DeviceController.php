@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Device;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DeviceController extends Controller
 {
@@ -14,7 +15,7 @@ class DeviceController extends Controller
      */
     public function index()
     {
-        return view('admin.devices.index',[
+        return view('admin.devices.index', [
             'devices' => Device::latest()->paginate(10)
         ]);
     }
@@ -37,16 +38,18 @@ class DeviceController extends Controller
      */
     public function store(Request $request)
     {
-        // ddd($request->all());
-
         $validate = $request->validate([
             'serie' => 'required|max:255',
             'joystick' => 'required'
         ]);
 
+        if ($request->file('image')) {
+            $validate['image'] = $request->file('image')->store('device_images');
+        }
+
         Device::create($validate);
 
-        return redirect('/devices')->with('success','Added Successfully!');
+        return redirect('/devices')->with('success', 'Added Successfully!');
     }
 
     /**
@@ -68,7 +71,9 @@ class DeviceController extends Controller
      */
     public function edit(Device $device)
     {
-        //
+        return view('admin.devices.edit', [
+            'device' => $device
+        ]);
     }
 
     /**
@@ -80,7 +85,23 @@ class DeviceController extends Controller
      */
     public function update(Request $request, Device $device)
     {
-        //
+        $rules = [
+            'serie' => 'required|max:255',
+            'joystick' => 'required'
+        ];
+
+        $validate = $request->validate($rules);
+
+        if ($request->file('image')) {
+            if ($request->oldImage) {
+                Storage::delete([$request->oldImage]);
+            }
+            $validate['image'] = $request->file('image')->store('device_images');
+        }
+
+        Device::where('id', $device->id)->update($validate);
+
+        return redirect('/devices')->with('success', 'Updated Successfully!');
     }
 
     /**
@@ -91,6 +112,12 @@ class DeviceController extends Controller
      */
     public function destroy(Device $device)
     {
-        //
+        Device::destroy($device->id);
+
+        if ($device->image) {
+            Storage::delete([$device->image]);
+        }
+
+        return redirect('/devices')->with('success', 'Deleted Successfully!');
     }
 }

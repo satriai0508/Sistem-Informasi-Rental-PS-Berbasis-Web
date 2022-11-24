@@ -11,5 +11,5 @@ class Device extends Model
 
     protected $guarded = ['id'];
 
-    protected $fillable = ['serie','joystick'];
+    protected $fillable = ['serie','joystick','image'];
 }
