@@ -53,7 +53,7 @@
           <td>{{ $rent->device->serie }}</td>
           <td>
             <a href="{{ route('rents.edit',$rent->id) }}" class="btn btn-sm btn-warning">Edit</a>
-            <form action="{{ route('rents.destroy',$rent->id) }}" method="post">
+            <form action="{{ route('rents.destroy',$rent->id) }}" method="post" class="d-inline-block">
               @csrf
               @method('delete')
               <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('are you sure?')">Delete</button>
