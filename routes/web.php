@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Models\{User, Device, Rent};
 use App\Http\Controllers\{HomeController, DeviceController, RentController};
 
 /*
@@ -15,10 +16,11 @@ use App\Http\Controllers\{HomeController, DeviceController, RentController};
 |
 */
 
-Route::get('/', fn () => view('welcome'));
-
-Route::middleware(['web'])->group(function () {
-});
+Route::get('/', fn () => view('main-page',[
+    'users' => User::count(),
+    'rents' => Rent::count(),
+    'devices' => Device::count(),
+]));
 
 Auth::routes();
 

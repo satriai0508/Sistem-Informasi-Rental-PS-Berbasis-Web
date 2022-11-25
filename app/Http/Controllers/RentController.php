@@ -77,7 +77,7 @@ class RentController extends Controller
         return view('admin.rents.edit', [
             'rent' => $rent,
             'devices' => Device::latest()->get(),
-            'users' => User::get(),
+            'users' => auth()->user()->id,
         ]);
     }
 
@@ -90,7 +90,19 @@ class RentController extends Controller
      */
     public function update(Request $request, Rent $rent)
     {
-        //
+        $rules = [
+            'price' => 'required|max:255',
+            'waktu_sewa' => 'required',
+        ];
+
+        $rules['device_id'] = 'required';
+        $rules['user_id'] = auth()->user()->id;
+
+        $validate = $request->validate($rules);
+
+        Rent::where('id', $rent->id)->update($validate);
+
+        return redirect('/rents')->with('success', 'Updated Successfully!');
     }
 
     /**
@@ -101,6 +113,8 @@ class RentController extends Controller
      */
     public function destroy(Rent $rent)
     {
-        //
+        Rent::destroy($rent->id);
+
+        return redirect('/rents')->with('success', 'Deleted Successfully!');
     }
 }

@@ -38,6 +38,7 @@
           <th scope="col">No</th>
           <th scope="col">Serie</th>
           <th scope="col">Joystick</th>
+          <th scope="col">Image</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
@@ -47,9 +48,14 @@
           <th scope="row">{{ $loop->iteration }}</th>
           <td>{{ $device->serie }}</td>
           <td>{{ $device->joystick }} Joystick</td>
+          @if($device->image)
+          <td><img src="{{ asset('storage/'. $device->image) }}" alt="{{ $device->serie }}" class="img-fluid img-thumbnail h-75 w-75"></td>
+          @else
+          <td class="h3 fs-3 text-center text-danger">Harap masukan gambar</td>
+          @endif
           <td>
             <a href="{{ route('devices.edit', $device->id) }}" class="btn btn-sm btn-warning">Edit</a>
-            <form action="{{ route('devices.destroy', $device->id) }}" method="post">
+            <form action="{{ route('devices.destroy', $device->id) }}" method="post" class="d-inline-block">
               @csrf
               @method('delete')
               <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('are you sure?')">Delete</button>
