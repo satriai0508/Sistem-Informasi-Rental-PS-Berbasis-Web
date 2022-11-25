@@ -44,7 +44,7 @@ class DeviceController extends Controller
         ]);
 
         if ($request->file('image')) {
-            $validate['image'] = $request->file('image')->store('device_images');
+            $validate['image'] = $request->file('image')->store('images');
         }
 
         Device::create($validate);
@@ -96,7 +96,7 @@ class DeviceController extends Controller
             if ($request->oldImage) {
                 Storage::delete([$request->oldImage]);
             }
-            $validate['image'] = $request->file('image')->store('device_images');
+            $validate['image'] = $request->file('image')->store('images');
         }
 
         Device::where('id', $device->id)->update($validate);

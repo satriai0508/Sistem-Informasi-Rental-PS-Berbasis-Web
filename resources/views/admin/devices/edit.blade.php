@@ -26,7 +26,7 @@
     <form action="/devices/{{ $device->id }}" method="post" enctype="multipart/form-data">
       @csrf
       @method('put')
-      <input type="hidden" name="oldImage" value="{{ old('image') }}">
+      <input type="hidden" name="oldImage" value="{{ old('image',$device->image) }}">
       <div class="form-group mb-3">
         <label for="serie" class="form-label">Serie</label>
         <input type="text" placeholder="Enter Serie" name="serie" class="form-control form-control-lg @error('serie')
